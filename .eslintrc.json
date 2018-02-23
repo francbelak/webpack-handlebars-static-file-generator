@@ -1,0 +1,66 @@
+{
+    "env": {
+        "amd": true,
+        "es6": true,
+        "node": true,
+        "mocha": true,
+        "browser": true
+    },
+    "globals": {
+      "$": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "eqeqeq":["warn", "always"],
+        "no-path-concat": "warn",
+        "no-sync": "off",
+        "no-caller": "warn",
+        "comma-dangle": ["warn", "only-multiline"],
+        "no-useless-computed-key": "warn",
+        "prefer-arrow-callback": "warn",
+        "prefer-rest-params": "warn",
+        "no-console": "off",
+        "no-else-return": "warn",
+        "no-eval": "warn",
+        "no-extend-native": "warn",
+        "no-floating-decimal": "warn",
+        "no-implied-eval": "warn",
+        "no-new-func": "warn",
+        "no-new-wrappers": "warn",
+        "no-octal-escape": "error",
+        "no-proto": "error",
+        "no-return-assign": "error",
+        "no-self-compare": "warn",
+        "no-sequences": "warn",
+        "no-throw-literal": "warn",
+        "no-unmodified-loop-condition": "warn",
+        "no-unused-expressions": "warn",
+        "no-unused-vars": ["warn", {"args":"none"}],
+        "no-useless-call": "warn",
+        "no-useless-escape": "warn",
+        "no-var": "warn",
+        "no-void": "error",
+        "radix": "warn",
+        "yoda": "warn",
+
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
