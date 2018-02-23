@@ -54,7 +54,10 @@
   },
   "keywords": [],
   "author": "Franc Belak",
-  "contributors": ["Christian Tschugg <iantsch@gmail.com> (https://mbt.wien/)", "Franc Belak <franc.belak@gmail.com> (http://francbelak.com/)"],
+  "contributors": [
+    "Christian Tschugg <iantsch@gmail.com> (https://mbt.wien/)",
+    "Franc Belak <franc.belak@gmail.com> (http://francbelak.com/)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/francbelak/webpack-handlebars-static-file-generator/issues"
