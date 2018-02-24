@@ -141,7 +141,7 @@ module.exports = {
         use: [{
           loader: 'css-loader',
           options: {
-            sourceMap: (DEBUG) ? true : false,
+            sourceMap: DEBUG,
             importLoaders: 2,
             url: false,
             root: '/dist/assets/images'
@@ -149,21 +149,26 @@ module.exports = {
         }, {
           loader: 'postcss-loader',
           options: {
-            sourceMap: (DEBUG) ? true : false
+            sourceMap: DEBUG
           }
         }, {
           loader: 'resolve-url-loader'
         }, {
           loader: 'sass-loader',
           options: {
-            sourceMap: (DEBUG) ? true : false
+            sourceMap: DEBUG
+          }
+        },{
+          loader: 'cleanup-loader',
+          options: {
+            test: /\.s?css$/i
           }
         }],
         // use style-loader in development
         fallback: {
           loader: 'style-loader',
           options: {
-            sourceMap: (DEBUG) ? true : false
+            sourceMap: DEBUG
           }
         }
       })
@@ -206,6 +211,11 @@ module.exports = {
           gifsicle: {
             interlaced: true
           }
+        }
+      },{
+        loader: 'cleanup-loader',
+        options: {
+          test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i
         }
       }]
     }]
