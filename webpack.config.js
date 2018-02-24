@@ -159,7 +159,7 @@ module.exports = {
             sourceMap: DEBUG
           }
         },{
-          loader: require.resolve('./webpack.cleanup-loader.js'),
+          loader: 'cleanup-loader',
           options: {
             test: /\.s?css$/i
           }
@@ -213,7 +213,7 @@ module.exports = {
           }
         }
       },{
-        loader: require.resolve('./webpack.cleanup-loader.js'),
+        loader: 'cleanup-loader',
         options: {
           test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i
         }
