@@ -3,6 +3,7 @@ let webPackSettings = require('./webpack.settings.js');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
+const deepAssign = require('deep-assign');
 const LIVE = process.env.NODE_ENV === 'live';
 const PRODUCTION = process.env.NODE_ENV === 'production';
 let absRefPrefix = webPackSettings.config.absRefPrefix.dev;
@@ -70,7 +71,7 @@ languages.forEach((languagefile) => {
   const languageData = path.join(__dirname, `data/${language}.json`);
   let data = require(languageData);
   globalData.absRefPrefix = (absRefPrefix === '') ? '../../' : absRefPrefix;
-  data = Object.assign(data, globalData, overridesData);
+  data = deepAssign(data, globalData, overridesData);
 
   handlebarsPlugins.push(
     new HandlebarsPlugin({
