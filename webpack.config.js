@@ -142,9 +142,7 @@ module.exports = {
           loader: 'css-loader',
           options: {
             sourceMap: DEBUG,
-            importLoaders: 2,
-            url: false,
-            root: '/dist/assets/images'
+            importLoaders: 2
           }
         }, {
           loader: 'postcss-loader',
@@ -156,7 +154,7 @@ module.exports = {
         }, {
           loader: 'sass-loader',
           options: {
-            sourceMap: DEBUG
+            sourceMap: true //must be enabled for resolve-ur-loader to work see: https://github.com/bholloway/resolve-url-loader#important
           }
         },{
           loader: 'cleanup-loader',
@@ -181,7 +179,18 @@ module.exports = {
         spriteFilename: './dist/assets/images/svg-sprite.svg'
       }
     }, {
-      test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i,
+      test: /\.(eot|ttf|woff2?)$/i,
+      loader: 'file-loader',
+      include: [
+        path.resolve('./node_modules'),
+      ],
+      options: {
+        name: '[name].[ext]',
+        publicPath: './fonts/',
+        outputPath: 'dist/css/fonts/',
+      }
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
       exclude: path.resolve('./src/assets/images/svg'),
       include: [
         path.resolve('./node_modules'),
@@ -191,7 +200,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
-          publicPath: absRefPrefix,
+          publicPath: '../assets/images/',
           outputPath: 'dist/assets/images/'
         }
       }, {
