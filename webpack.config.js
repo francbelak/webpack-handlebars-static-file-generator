@@ -3,6 +3,7 @@ let webPackSettings = require('./webpack.settings.js');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
+const merge = require('lodash.merge');
 const LIVE = process.env.NODE_ENV === 'live';
 const PRODUCTION = process.env.NODE_ENV === 'production';
 const defaultLanguage = webPackSettings.config.defaultLanguage;
@@ -86,7 +87,7 @@ languages.forEach((languagefile) => {
   const languageData = path.join(__dirname, `data/${language}.json`);
   let data = require(languageData);
   globalData.absRefPrefix = (absRefPrefix === '') ? '../../' : absRefPrefix;
-  data = Object.assign(data, globalData, overridesData);
+  data = merge({}, globalData, data, overridesData);
 
   handlebarsPlugins.push(
     new HandlebarsPlugin({
