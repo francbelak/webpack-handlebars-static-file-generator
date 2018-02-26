@@ -5,6 +5,7 @@ const fs = require('fs');
 const glob = require('glob');
 const LIVE = process.env.NODE_ENV === 'live';
 const PRODUCTION = process.env.NODE_ENV === 'production';
+const defaultLanguage = webPackSettings.config.defaultLanguage;
 let absRefPrefix = webPackSettings.config.absRefPrefix.dev;
 let DEBUG = true;
 
@@ -23,8 +24,23 @@ if (!languages || languages.length === 0) {
   process.exit(1);
 }
 
+if (defaultLanguage && languages.indexOf(defaultLanguage + '.json') === -1) {
+  console.error(`Create a language data json for your default language "${defaultLanguage}" in ${path.join(__dirname, 'data')}`);
+  process.exit(1);
+}
+
 if (LIVE) {
   absRefPrefix = webPackSettings.config.absRefPrefix.live;
+}
+
+const defaultRouteFolder = '/routes/default';
+
+function isDefaultRoute(path) {
+  let isDefault = false;
+  if (path.indexOf(defaultRouteFolder) > -1) {
+    isDefault = true;
+  }
+  return isDefault;
 }
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -77,22 +93,28 @@ languages.forEach((languagefile) => {
       entry: path.join(process.cwd(), 'src', 'templates', '*', '*', 'index.handlebars'),
       data: data,
       onBeforeRender: function (Handlebars, data, filename) {
-        if (filename.indexOf('routes/default') > -1) {
-          if (data.absRefPrefix === '../../') {
-            data = Object.assign(data, { absRefPrefix: '../' });
-          }
-        } else if (data.absRefPrefix === '../') {
+        if (language === defaultLanguage && isDefaultRoute(filename)) {
+          data = Object.assign(data, { absRefPrefix: './' });
+        } else if (isDefaultRoute(filename)) {
+          data = Object.assign(data, { absRefPrefix: '../' });
+        } else if (data.absRefPrefix === '../' || data.absRefPrefix === './') {
           data = Object.assign(data, { absRefPrefix: '../../' });
+          if (language === defaultLanguage)
+            data = Object.assign(data, { absRefPrefix: '../' });
         }
         return data;
       },
       onBeforeSave: function (Handlebars, resultHtml, filename) {
-        const routesFolder = '/routes';
-        let targetFilepath = path.join(__dirname, 'dist', language, filename.substr(filename.indexOf(routesFolder) + routesFolder.length)) + '.html';
+        let languagePath = language;
+        if (language === defaultLanguage) {
+          languagePath = '';
+        }
 
-        if (filename.indexOf('routes/default') > -1) {
-          const defaultRouteFolder = '/routes/default';
-          targetFilepath = path.join(__dirname, 'dist', language, filename.substr(filename.indexOf(defaultRouteFolder) + defaultRouteFolder.length)) + '.html';
+        const routesFolder = '/routes';
+        let targetFilepath = path.join(__dirname, 'dist', languagePath, filename.substr(filename.indexOf(routesFolder) + routesFolder.length)) + '.html';
+
+        if (isDefaultRoute(filename)) {
+          targetFilepath = path.join(__dirname, 'dist', languagePath, filename.substr(filename.indexOf(defaultRouteFolder) + defaultRouteFolder.length)) + '.html';
         }
 
         return {
