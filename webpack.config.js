@@ -96,7 +96,8 @@ module.exports = {
         },{
           loader: 'cleanup-loader',
           options: {
-            test: /\.s?css$/i
+            test: /\.s?css$/i,
+            path: 'dist/'
           }
         }],
         // use style-loader in development
@@ -161,7 +162,8 @@ module.exports = {
       }, {
         loader: 'cleanup-loader',
         options: {
-          test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i
+          test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i,
+          path: 'dist/'
         }
       }]
     }, {
@@ -169,11 +171,19 @@ module.exports = {
       use: [{
         loader: 'webpack-handlebars-loader',
         options: {
-          //Note: use partials without trailing slash
-          partials: path.resolve(__dirname, 'src/templates/partials'),
+          partials: [
+            path.resolve(__dirname, 'node_modules/hbs-*/src/partials/**/*.hbs'),
+            path.resolve(__dirname, 'src/templates/partials/**/*.handlebars')
+          ],
+          helpers: [
+            path.resolve(__dirname, 'node_modules/hbs-*/helpers/**/*.helper.js')
+          ],
           relativePathTo: path.resolve(__dirname, 'src/templates/routes'),
           outputpath: 'dist',
-          data: 'data',
+          data: [
+            path.resolve(__dirname, 'node_modules/hbs-*/data/**/*.json'),
+            path.resolve(__dirname, 'data/**/*.json')
+          ],
           rootData: webPackSettings.config.defaultLanguage
         }
       }]
