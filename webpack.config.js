@@ -172,7 +172,7 @@ module.exports = {
           //Note: use partials without trailing slash
           partials: path.resolve(__dirname, 'src/templates/partials/**/*.handlebars'),
           relativePathTo: path.resolve(__dirname, 'src/templates/routes'),
-          outputpath: path.resolve(__dirname, 'dist'),
+          outputpath: 'dist',
           data: path.resolve(__dirname,'data/**/*.json'),
           rootData: webPackSettings.config.defaultLanguage
         }
