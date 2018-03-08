@@ -170,10 +170,10 @@ module.exports = {
         loader: 'webpack-handlebars-loader',
         options: {
           //Note: use partials without trailing slash
-          partials: path.resolve(__dirname, 'src/templates/partials'),
+          partials: path.resolve(__dirname, 'src/templates/partials/**/*.handlebars'),
           relativePathTo: path.resolve(__dirname, 'src/templates/routes'),
-          outputpath: 'dist',
-          data: 'data',
+          outputpath: path.resolve(__dirname, 'dist'),
+          data: path.resolve(__dirname,'data/**/*.json'),
           rootData: webPackSettings.config.defaultLanguage
         }
       }]
