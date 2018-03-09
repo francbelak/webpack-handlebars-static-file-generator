@@ -48,7 +48,6 @@ pluginArrayLive = pluginArrayLive.concat(pluginArrayGeneric);
 module.exports = {
   entry: {
     '/dist/js/main.dist': './src/js/main.js',
-    '/dist/assets/images/svg-sprite': glob.sync(path.resolve(__dirname, 'src/assets/images/svg/**/*.svg')),
     '/dist/assets/images/': glob.sync(path.resolve(__dirname, 'src/assets/images/**/*.*')),
     '/dist/css/main': './src/sass/main.scss',
     '/dist/handlebars': glob.sync(path.resolve(__dirname, 'src/templates/routes/**/index.handlebars'))
