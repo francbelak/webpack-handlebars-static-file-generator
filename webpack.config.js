@@ -52,7 +52,6 @@ module.exports = {
     '/dist/assets/images/svg-sprite': glob.sync(path.resolve(__dirname, 'src/assets/images/svg/**/*.svg')),
     '/dist/assets/images/': glob.sync(path.resolve(__dirname, 'src/assets/images/**/*.*')),
     '/dist/css/main': './src/sass/main.scss',
-    '/dist/css/critical': './src/sass/critical.scss',
     '/dist/handlebars': glob.sync(path.resolve(__dirname, 'src/templates/routes/**/index.handlebars'))
   },
   output: {
@@ -74,6 +73,17 @@ module.exports = {
       }
     },{
       test: /\.scss$/,
+      include: path.resolve('./src/sass/critical.scss'),
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader'
+      }, {
+        loader: 'sass-loader'
+      }]
+    }, {
+      test: /\.scss$/,
+      exclude: path.resolve('./src/sass/critical.scss'),
       use: extractSass.extract({
         use: [{
           loader: 'css-loader',
