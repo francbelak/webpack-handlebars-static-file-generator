@@ -3,10 +3,9 @@ let webPackSettings = require('./webpack.settings.js');
 const path = require('path');
 const glob = require('glob');
 const LIVE = process.env.NODE_ENV === 'live';
-const PRODUCTION = process.env.NODE_ENV === 'production';
 let DEBUG = true;
 
-if (PRODUCTION || LIVE) {
+if (LIVE) {
   DEBUG = false;
 }
 

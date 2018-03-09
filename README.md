@@ -17,9 +17,7 @@ All necessary development dependencies can be installed by executing the followi
 
 Duplicate **webpack.settings.sample.js** and name it **webpack.settings.js**. Make necessary settings there.
 
-- absRefPrefix
- - dev: path to development setup (use "" empty string for relative handling)
- - live: path to live setup (use "" empty string for relative handling)
+- defaultLanguage: 'en' (located in data/en.json)
 - reload (LiveReloadPlugin options)
  - protocol: http or https
  - port: free port for live reloading
@@ -38,7 +36,6 @@ Duplicate **webpack.settings.sample.js** and name it **webpack.settings.js**. Ma
 |--|--|
 |`npm run dev`| starts the watch task for development (supports auto-reload) |
 |`npm run dev-debug`| does not watch - execute development debug build without watcher |
-|`npm run production`| generates the production build with local absRefPrefix |
 |`npm run live`| generates the production build for deployment |
 
 ## Deploy

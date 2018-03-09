@@ -46,7 +46,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --watch",
     "dev-debug": "webpack",
-    "production": "cross-env NODE_ENV=production webpack",
     "live": "cross-env NODE_ENV=live webpack",
     "deploy": "node deploy"
   },
