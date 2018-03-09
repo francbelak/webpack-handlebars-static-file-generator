@@ -118,12 +118,17 @@ module.exports = {
       })
     }, {
       test: /\.svg$/i,
-      loader: 'svg-sprite-loader',
       include: path.resolve('./src/assets/images/svg'),
-      options: {
-        extract: true,
-        spriteFilename: './dist/assets/images/svg-sprite.svg'
-      }
+      use:[{
+        loader: 'svg-sprite-loader'
+      }, {
+        loader: 'svgo-loader',
+        options: {
+          plugins: [{
+            removeAttrs: { attrs: '(fill|stroke|fill-opacity)' }
+          }]
+        }
+      }]
     }, {
       test: /\.(eot|ttf|woff2?)$/i,
       loader: 'file-loader',
