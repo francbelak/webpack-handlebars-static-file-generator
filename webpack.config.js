@@ -3,10 +3,9 @@ let webPackSettings = require('./webpack.settings.js');
 const path = require('path');
 const glob = require('glob');
 const LIVE = process.env.NODE_ENV === 'live';
-const PRODUCTION = process.env.NODE_ENV === 'production';
 let DEBUG = true;
 
-if (PRODUCTION || LIVE) {
+if (LIVE) {
   DEBUG = false;
 }
 
@@ -49,10 +48,8 @@ pluginArrayLive = pluginArrayLive.concat(pluginArrayGeneric);
 module.exports = {
   entry: {
     '/dist/js/main.dist': './src/js/main.js',
-    '/dist/assets/images/svg-sprite': glob.sync(path.resolve(__dirname, 'src/assets/images/svg/**/*.svg')),
     '/dist/assets/images/': glob.sync(path.resolve(__dirname, 'src/assets/images/**/*.*')),
     '/dist/css/main': './src/sass/main.scss',
-    '/dist/css/critical': './src/sass/critical.scss',
     '/dist/handlebars': glob.sync(path.resolve(__dirname, 'src/templates/routes/**/index.handlebars'))
   },
   output: {
@@ -74,6 +71,17 @@ module.exports = {
       }
     },{
       test: /\.scss$/,
+      include: path.resolve('./src/sass/critical.scss'),
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader'
+      }, {
+        loader: 'sass-loader'
+      }]
+    }, {
+      test: /\.scss$/,
+      exclude: path.resolve('./src/sass/critical.scss'),
       use: extractSass.extract({
         use: [{
           loader: 'css-loader',
@@ -110,12 +118,17 @@ module.exports = {
       })
     }, {
       test: /\.svg$/i,
-      loader: 'svg-sprite-loader',
       include: path.resolve('./src/assets/images/svg'),
-      options: {
-        extract: true,
-        spriteFilename: './dist/assets/images/svg-sprite.svg'
-      }
+      use:[{
+        loader: 'svg-sprite-loader'
+      }, {
+        loader: 'svgo-loader',
+        options: {
+          plugins: [{
+            removeAttrs: { attrs: '(fill|stroke|fill-opacity)' }
+          }]
+        }
+      }]
     }, {
       test: /\.(eot|ttf|woff2?)$/i,
       loader: 'file-loader',
@@ -171,12 +184,13 @@ module.exports = {
       use: [{
         loader: 'webpack-handlebars-loader',
         options: {
+          //Note: use partials without trailing slash
           partials: [
-            path.resolve(__dirname, 'node_modules/hbs-*/src/partials/**/*.hbs'),
+            path.resolve(__dirname, 'node_modules/hbs-*/src/templates/partials/**/*.hbs'),
             path.resolve(__dirname, 'src/templates/partials/**/*.handlebars')
           ],
           helpers: [
-            path.resolve(__dirname, 'node_modules/hbs-*/helpers/**/*.helper.js')
+            path.resolve(__dirname, 'node_modules/hbs-*/src/helpers/**/*.helper.js')
           ],
           relativePathTo: path.resolve(__dirname, 'src/templates/routes'),
           outputpath: 'dist',
