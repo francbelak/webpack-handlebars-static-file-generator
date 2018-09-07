@@ -1,4 +1,96 @@
 {
   "content": "Inhalt",
-  "linktext": "Link zu Unterseite"
+  "linktext": "Link zu Unterseite",
+  "form": {
+    "content" : {
+      "hl" : {
+        "pre" : "Pre",
+        "text": "Headline",
+        "post" : "Post"
+      },
+      "copy" : "<p>Ich bin ein Beschreibungstext.</p>",
+      "gender" : {
+        "label" : "Anrede*",
+        "error" : "Bitte geben Sie eine Anrede.",
+        "options" : {
+          "m" : "Herr",
+          "f" : "Frau"
+        }
+      },
+      "first_name" : {
+        "label" : "Vorname*",
+        "error" : "Bitte geben Sie Ihren Vornamen an."
+      },
+      "last_name" : {
+        "label" : "Nachname*",
+        "error" : "Bitte geben Sie Ihren Nachnamen an."
+      },
+      "email" : {
+        "label" : "E-Mail Adresse*",
+        "error" : "Bitte geben Sie Ihre E-Mail Adresse an."
+      },
+      "birthday" : {
+        "label" : "Geburtstag*",
+        "min_age" : 18,
+        "error" : "Sie müssens mindestens 18 Jahre alt sein.",
+        "day": {
+          "label" : "Tag",
+          "error" : "Bitte geben Sie Ihren Geburtstag an."
+        },
+        "month": {
+          "label" : "Monat",
+          "error" : "Bitte geben Sie Ihren Geburtsmonat an."
+        },
+        "year": {
+          "label" : "Jahr",
+          "error" : "Bitte geben Sie Ihr Geburtsjahr an."
+        }
+      },
+      "street" : {
+        "label" : "Straße",
+        "error" : "Bitte geben Sie Ihre Straße an."
+      },
+      "streetnr" : {
+        "label" : "Nr.",
+        "error" : "Bitte geben Sie Ihre Straßennummer an."
+      },
+      "postalcode" : {
+        "label" : "PLZ",
+        "error" : "Bitte geben Sie Ihre Postleitzahl an."
+      },
+      "locality" : {
+        "label" : "Wohnort",
+        "error" : "Bitte geben Sie Ihren Wohnort an."
+      },
+      "terms" : {
+        "label" : "<p>Ja, ich akzeptiere die Datenschutzvereinbarung/Teilnahmebedingungen.</p>",
+        "error" : "Bitte akzeptieren Sie unsere Datenschutzvereinbarung/Teilnahmebedingungen."
+      },
+      "newsletter" : {
+        "label" : "<p>Ja, ich möchte den Newsletter abonnieren.</p>"
+      },
+      "required" : {
+        "label" : "* Pflichtfelder"
+      },
+      "submit" : {
+        "label" : "Absenden"
+      }
+    },
+    "success" : {
+      "hl" : {
+        "pre" : "Pre",
+        "text": "Erfolg",
+        "post" : "Post"
+      },
+      "copy" : "<p>Ich bin ein Beschreibungstext für das erfolgreiche Absenden des Formulars.</p>"
+    },
+    "error" : {
+      "hl" : {
+        "pre" : "Pre",
+        "text": "Headline",
+        "post" : "Post"
+      },
+      "copy" : "<p>Ich bin ein Beschreibungstext für das nicht erfolgreiche Absenden des Formulars.</p>"
+    }
+  }
 }
