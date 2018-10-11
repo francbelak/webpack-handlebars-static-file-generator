@@ -13,6 +13,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WatchExternalFilesPlugin = require('webpack-watch-files-plugin');
 const extractSass = new ExtractTextPlugin({
   filename: '[name].css',
   disable: false //Remove debug option in case of source map issues
@@ -35,6 +36,12 @@ const pluginArrayGeneric = [
 ];
 
 let pluginArrayDebug = [
+  new WatchExternalFilesPlugin.default({
+    files: [
+      path.resolve(__dirname, 'src/templates/partials/**/*.handlebars'),
+      path.resolve(__dirname,'data/**/*.json')
+    ]
+  }),
   new LiveReloadPlugin(webPackSettings.config.reload)
 ];
 pluginArrayDebug = pluginArrayDebug.concat(pluginArrayGeneric);
@@ -55,6 +62,9 @@ module.exports = {
   output: {
     path : path.resolve(__dirname),
     filename: '[name].js'
+  },
+  watchOptions: {
+    poll: true
   },
   devtool: (DEBUG) ? 'source-map' : 'none',
   module : {
