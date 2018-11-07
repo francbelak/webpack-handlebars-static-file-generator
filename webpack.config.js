@@ -200,6 +200,19 @@ module.exports = {
           rootData: webPackSettings.config.defaultLanguage
         }
       }]
+    }, {
+      test: /\.mp4/i,
+      include: [
+        path.resolve('./src/assets/videos/')
+      ],
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: '../assets/videos/',
+          outputPath: 'dist/assets/videos/'
+        }
+      }]
     }]
   },
   plugins: DEBUG ? pluginArrayDebug :  pluginArrayLive
