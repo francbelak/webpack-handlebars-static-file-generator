@@ -150,7 +150,7 @@ module.exports = {
         outputPath: 'dist/css/fonts/',
       }
     }, {
-      test: /\.(jpe?g|png|gif|svg)$/i,
+      test: /\.(jpe?g|png|gif|svg|ico)$/i,
       exclude: path.resolve('./src/assets/images/svg'),
       include: [
         path.resolve('./node_modules'),
