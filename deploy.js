@@ -1,4 +1,4 @@
-const deploy = require('./deploy.settings.js');
+const deploy = require('./dist/deploy.settings.js');
 let FtpDeploy = require('ftp-deploy');
 let ftpDeploy = new FtpDeploy();
 

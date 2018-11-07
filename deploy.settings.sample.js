@@ -5,6 +5,7 @@ exports.settings = {
   port: 21,
   localRoot: __dirname,
   remoteRoot: '/',
-  include: [],
-  exclude: []
+  exclude: [
+    'deploy.settings.js',
+  ]
 };

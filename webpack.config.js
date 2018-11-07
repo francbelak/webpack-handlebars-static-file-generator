@@ -2,6 +2,7 @@ let webpack = require('webpack');
 let webPackSettings = require('./webpack.settings.js');
 const path = require('path');
 const glob = require('glob');
+const fs = require('fs');
 const LIVE = process.env.NODE_ENV === 'live';
 let DEBUG = true;
 
@@ -14,6 +15,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WatchExternalFilesPlugin = require('webpack-watch-files-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const extractSass = new ExtractTextPlugin({
   filename: '[name].css',
   disable: false //Remove debug option in case of source map issues
@@ -50,6 +52,15 @@ let pluginArrayLive = [
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
 ];
+
+const deploySettingsFilepath = './deploy.settings.js';
+if (fs.existsSync(deploySettingsFilepath)) {
+  pluginArrayLive.push(new CopyWebpackPlugin([{
+    from: './deploy.settings.js',
+    to: './dist'
+  }]));
+}
+
 pluginArrayLive = pluginArrayLive.concat(pluginArrayGeneric);
 
 module.exports = {
