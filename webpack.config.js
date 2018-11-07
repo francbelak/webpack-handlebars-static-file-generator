@@ -56,7 +56,7 @@ let pluginArrayLive = [
 const deploySettingsFilepath = './deploy.settings.js';
 if (fs.existsSync(deploySettingsFilepath)) {
   pluginArrayLive.push(new CopyWebpackPlugin([{
-    from: './deploy.settings.js',
+    from: deploySettingsFilepath,
     to: './dist'
   }]));
 }
