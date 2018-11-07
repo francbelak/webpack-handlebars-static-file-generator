@@ -213,6 +213,16 @@ module.exports = {
           outputPath: 'dist/assets/videos/'
         }
       }]
+    }, {
+      test: /\.php$/i,
+      loader: 'file-loader',
+      include: [
+        path.resolve('./src/php'),
+      ],
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'dist/php/',
+      }
     }]
   },
   plugins: DEBUG ? pluginArrayDebug :  pluginArrayLive
