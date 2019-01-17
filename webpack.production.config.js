@@ -1,31 +1,12 @@
-let webpack = require('webpack');
 let webPackSettings = require('./webpack.settings.js');
 const path = require('path');
-const glob = require('glob');
 const fs = require('fs');
-const LIVE = process.env.NODE_ENV === 'live';
-let DEBUG = true;
-
-if (LIVE) {
-  DEBUG = false;
-}
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-const LiveReloadPlugin = require('webpack-livereload-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WatchExternalFilesPlugin = require('webpack-watch-files-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const extractSass = new ExtractTextPlugin({
-  filename: '[name].css',
-  disable: false //Remove debug option in case of source map issues
-});
 
-const pluginArrayGeneric = [
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery'
-  }),
+const plugins = [
   new CleanWebpackPlugin([
     './dist'
   ], {
@@ -33,51 +14,27 @@ const pluginArrayGeneric = [
     verbose:  true,     //WRITE CONSOLE LOGS
     dry:      false     //TEST EMULATE DELETE - ONLY CONSOLE LOGS WHAT SHOULD BE DELETED
   }),
-  extractSass,
   new SpriteLoaderPlugin({ plainSprite: true })
-];
-
-let pluginArrayDebug = [
-  new WatchExternalFilesPlugin.default({
-    files: [
-      path.resolve(__dirname, 'src/templates/partials/**/*.handlebars'),
-      path.resolve(__dirname,'data/**/*.json')
-    ]
-  }),
-  new LiveReloadPlugin(webPackSettings.config.reload)
-];
-pluginArrayDebug = pluginArrayDebug.concat(pluginArrayGeneric);
-
-let pluginArrayLive = [
-  new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
 ];
 
 const deploySettingsFilepath = './deploy.settings.js';
 if (fs.existsSync(deploySettingsFilepath)) {
-  pluginArrayLive.push(new CopyWebpackPlugin([{
+  plugins.push(new CopyWebpackPlugin([{
     from: deploySettingsFilepath,
     to: './dist'
   }]));
 }
 
-pluginArrayLive = pluginArrayLive.concat(pluginArrayGeneric);
-
 module.exports = {
+  mode: 'production',
   entry: {
-    '/dist/js/main.dist': './src/js/main.js',
-    '/dist/assets/images/': glob.sync(path.resolve(__dirname, 'src/assets/images/**/*.*')),
-    '/dist/css/main': './src/sass/main.scss',
-    '/dist/handlebars': glob.sync(path.resolve(__dirname, 'src/templates/routes/**/index.handlebars'))
+    '/dist/js/main.dist': './src/js/main.js'
   },
   output: {
     path : path.resolve(__dirname),
     filename: '[name].js'
   },
-  watchOptions: {
-    poll: true
-  },
-  devtool: (DEBUG) ? 'source-map' : 'none',
+  devtool: 'none',
   module : {
     rules: [{
       test: /\.js$/,
@@ -92,7 +49,10 @@ module.exports = {
       }
     },{
       test: /\.scss$/,
-      include: path.resolve('./src/sass/critical.scss'),
+      include: [
+        path.resolve('./src/sass/critical.scss'),
+        path.resolve('./src/sass/main.scss')
+      ],
       use: [{
         loader: 'style-loader'
       }, {
@@ -100,42 +60,6 @@ module.exports = {
       }, {
         loader: 'sass-loader'
       }]
-    }, {
-      test: /\.scss$/,
-      exclude: path.resolve('./src/sass/critical.scss'),
-      use: extractSass.extract({
-        use: [{
-          loader: 'css-loader',
-          options: {
-            sourceMap: DEBUG,
-            importLoaders: 2
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: DEBUG
-          }
-        }, {
-          loader: 'resolve-url-loader'
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true //must be enabled for resolve-ur-loader to work see: https://github.com/bholloway/resolve-url-loader#important
-          }
-        },{
-          loader: 'cleanup-loader',
-          options: {
-            test: /\.s?css$/i
-          }
-        }],
-        // use style-loader in development
-        fallback: {
-          loader: 'style-loader',
-          options: {
-            sourceMap: DEBUG
-          }
-        }
-      })
     }, {
       test: /\.svg$/i,
       include: path.resolve('./src/assets/images/svg'),
@@ -236,5 +160,5 @@ module.exports = {
       }
     }]
   },
-  plugins: DEBUG ? pluginArrayDebug :  pluginArrayLive
+  plugins: plugins
 };

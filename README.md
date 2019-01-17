@@ -34,9 +34,9 @@ Duplicate **webpack.settings.sample.js** and name it **webpack.settings.js**. Ma
 
 |Command Line|Task description|
 |--|--|
-|`npm run dev`| starts the watch task for development (supports auto-reload) |
-|`npm run dev-debug`| does not watch - execute development debug build without watcher |
-|`npm run live`| generates the production build for deployment |
+|`npm start`| starts webpack dev server |
+|`npm run serve`| generates the production build for deployment |
+|`npm run deploy`| deploys the project |
 
 ## Deploy
 
