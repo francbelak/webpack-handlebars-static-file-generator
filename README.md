@@ -15,15 +15,9 @@ All necessary development dependencies can be installed by executing the followi
 
 ### Configuration
 
-Duplicate **webpack.settings.sample.js** and name it **webpack.settings.js**. Make necessary settings there.
+Set default language in webpack.settings.js to define which language should be used for root path.
 
-- defaultLanguage: 'en' (located in data/en.json)
-- reload (LiveReloadPlugin options)
- - protocol: http or https
- - port: free port for live reloading
- - hostname: you can use localhost
- - appendScriptTag: true (to automatically ad script tag)
-
+- defaultLanguage: 'de' (located in data/de.json)
 
 ### Available tasks
 
