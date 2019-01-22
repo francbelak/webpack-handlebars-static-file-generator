@@ -9,7 +9,7 @@ html, body {
 }
 
 h1, h2, h3, h4 {
-  margin: $rowGutter 0;
+  margin: $gutter 0;
   font-family: 'Arial', sans-serif;
   font-weight: inherit;
   line-height: 1.2;
@@ -17,7 +17,6 @@ h1, h2, h3, h4 {
 
 h1 {
   font-size: 3.998em;
-  color: $white;
 }
 
 h2 {

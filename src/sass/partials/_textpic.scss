@@ -1,13 +1,13 @@
 .textpic {
-  margin: 0 $colGutter;
+  margin: 0 $gutter;
 }
 
 .textpic__content {
   display: flex;
   background: white;
-  padding: $rowGutter $colGutter;
+  padding: $gutter $gutter;
 }
 
 .content__image {
-  margin-right: $colGutter;
+  margin-right: $gutter;
 }

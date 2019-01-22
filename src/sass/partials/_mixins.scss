@@ -1,0 +1,29 @@
+@mixin hover-state {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin bg-mode($modifier, $color) {
+  #{$modifier} {
+    background-color: $color;
+  }
+  a#{$modifier},
+  button#{$modifier} {
+    @include hover-state {
+      background-color: darken($color, 20%);
+    }
+  }
+}
+
+@mixin text-color-mode($modifier, $color) {
+  #{$modifier} {
+    color: $color;
+  }
+  a#{$modifier} {
+    @include hover-state {
+      color: darken($color, 20%);
+    }
+  }
+}
