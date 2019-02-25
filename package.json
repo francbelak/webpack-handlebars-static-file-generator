@@ -35,7 +35,7 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
-    "webpack-handlebars-loader": "git+https://github.com/francbelak/webpack-handlebars-loader.git#2.0.0",
+    "webpack-handlebars-loader": "git+https://github.com/francbelak/webpack-handlebars-loader.git#2.0.1",
     "webpack-livereload-plugin": "^2.2.0",
     "webpack-provide-global-plugin": "0.0.1",
     "webpack-watch-files-plugin": "^1.0.2"
