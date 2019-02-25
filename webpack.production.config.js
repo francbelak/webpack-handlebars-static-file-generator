@@ -39,14 +39,7 @@ module.exports = {
     rules: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      exclude: '/node_modules/',
-      options: {
-        presets: [
-          'es2015',
-          'stage-2'
-        ],
-        plugins: ['transform-object-assign']
-      }
+      exclude: '/node_modules/'
     },{
       test: /\.scss$/,
       include: [
