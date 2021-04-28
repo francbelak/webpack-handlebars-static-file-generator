@@ -1,14 +1,10 @@
-const DEBUG = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'live';
-
-module.exports = ({ file, options, env }) => ({
+/* eslint-disable */
+module.exports = ({ file }) => ({
   parser: file.extname === '.css' ? 'sugarss' : require('postcss-scss'),
   plugins: {
     'postcss-import': {},
-    'postcss-cssnext': {
-      warnForDuplicates: false
-    },
-    'cssnano': {},
-    'postcss-object-fit-images': {}
+    'postcss-preset-env': {},
+    cssnano: {},
   },
-  sourceMap: DEBUG
+  sourceMap: false,
 });
