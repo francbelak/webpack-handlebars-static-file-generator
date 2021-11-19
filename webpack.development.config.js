@@ -39,9 +39,6 @@ module.exports = {
       ],
       use: [{
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: './',
-        },
       }, {
         loader: 'css-loader',
         options: {
@@ -80,14 +77,10 @@ module.exports = {
         path.resolve('./node_modules'),
         path.resolve('./src/assets/images/'),
       ],
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          publicPath: '../assets/images/',
-          outputPath: './assets/images/',
-        },
-      }],
+      type: 'asset/resource',
+      generator: {
+        filename: 'assets/images/[name][ext]',
+      },
     }, {
       test: /\.handlebars$/,
       use: [{
@@ -106,35 +99,25 @@ module.exports = {
       include: [
         path.resolve('./src/assets/videos/'),
       ],
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          publicPath: '../assets/videos/',
-          outputPath: './assets/videos/',
-        },
-      }],
+      type: 'asset/resource',
+      generator: {
+        filename: 'assets/videos/[name][ext]',
+      },
     }, {
       test: /\.php$/i,
-      loader: 'file-loader',
       include: [
         path.resolve('./src/php'),
       ],
-      options: {
-        name: '[name].[ext]',
-        outputPath: './php/',
+      type: 'asset/resource',
+      generator: {
+        filename: 'php/[name][ext]',
       },
     }, {
       test: /\.(eot|ttf|woff2?)$/i,
-      loader: 'file-loader',
       include: [
         path.resolve('./node_modules'),
       ],
-      options: {
-        name: '[name].[ext]',
-        publicPath: './fonts/',
-        outputPath: './css/fonts/',
-      },
+      type: 'asset/inline',
     }],
   },
   plugins,

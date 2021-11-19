@@ -56,9 +56,6 @@ module.exports = {
       ],
       use: [{
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: './',
-        },
       }, {
         loader: 'css-loader',
       }, {
@@ -86,15 +83,10 @@ module.exports = {
       }],
     }, {
       test: /\.(eot|ttf|woff2?)$/i,
-      loader: 'file-loader',
       include: [
         path.resolve('./node_modules'),
       ],
-      options: {
-        name: '[name].[ext]',
-        publicPath: './fonts/',
-        outputPath: 'dist/css/fonts/',
-      },
+      type: 'asset/inline',
     }, {
       test: /\.(jpe?g|png|gif|svg|ico)$/i,
       exclude: path.resolve('./src/assets/images/svg'),
@@ -102,14 +94,11 @@ module.exports = {
         path.resolve('./node_modules'),
         path.resolve('./src/assets/images/'),
       ],
+      type: 'asset/resource',
+      generator: {
+        filename: 'dist/assets/images/[name][ext]',
+      },
       use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          publicPath: '../assets/images/',
-          outputPath: 'dist/assets/images/',
-        },
-      }, {
         loader: 'image-webpack-loader',
         options: {
           mozjpeg: {
@@ -151,23 +140,18 @@ module.exports = {
       include: [
         path.resolve('./src/assets/videos/'),
       ],
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          publicPath: '../assets/videos/',
-          outputPath: 'dist/assets/videos/',
-        },
-      }],
+      type: 'asset/resource',
+      generator: {
+        filename: 'dist/assets/videos/[name][ext]',
+      },
     }, {
       test: /\.php$/i,
-      loader: 'file-loader',
       include: [
         path.resolve('./src/php'),
       ],
-      options: {
-        name: '[name].[ext]',
-        outputPath: 'dist/php/',
+      type: 'asset/resource',
+      generator: {
+        filename: 'dist/php/[name][ext]',
       },
     }],
   },
