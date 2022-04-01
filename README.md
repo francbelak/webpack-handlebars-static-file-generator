@@ -35,3 +35,7 @@ Set default language in webpack.settings.js to define which language should be u
 ## Deploy
 
 Duplicate **deploy.settings.sample.js** and name it **deploy.settings.js**. See https://github.com/simonh1000/ftp-deploy for more information.
+
+## Questions
+
+In case of questions ask https://digitalists.at
