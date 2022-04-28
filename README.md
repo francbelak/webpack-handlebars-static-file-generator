@@ -29,7 +29,7 @@ Set default language in webpack.settings.js to define which language should be u
 |Command Line|Task description|
 |--|--|
 |`npm start`| starts webpack dev server |
-|`npm run serve`| generates the production build for deployment |
+|`npm run build`| generates the production build for deployment |
 |`npm run deploy`| deploys the project |
 
 ## Deploy

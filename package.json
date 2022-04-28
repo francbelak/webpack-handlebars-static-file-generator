@@ -42,7 +42,7 @@
   "scripts": {
     "start": "webpack serve --mode development --open --config webpack.development.config.js --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "webpack --config webpack.production.config.js",
+    "build": "webpack --config webpack.production.config.js",
     "deploy": "node deploy"
   },
   "repository": {
