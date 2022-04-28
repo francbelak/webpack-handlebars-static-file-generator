@@ -82,6 +82,16 @@ module.exports = {
         filename: 'assets/images/[name][ext]',
       },
     }, {
+      test: /\.(glb|fbx|gltf)$/i,
+      include: [
+        path.resolve('./node_modules'),
+        path.resolve('./src/assets/3D/'),
+      ],
+      type: 'asset/resource',
+      generator: {
+        filename: 'assets/3D/[name][ext]',
+      },
+    }, {
       test: /\.handlebars$/,
       use: [{
         loader: 'webpack-handlebars-loader',

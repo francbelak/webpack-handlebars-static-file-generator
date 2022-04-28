@@ -136,6 +136,15 @@ module.exports = {
         },
       }],
     }, {
+      test: /\.(glb|fbx|gltf)$/i,
+      include: [
+        path.resolve('./src/assets/3D/'),
+      ],
+      type: 'asset/resource',
+      generator: {
+        filename: 'dist/assets/3D/[name][ext]',
+      },
+    }, {
       test: /\.mp4/i,
       include: [
         path.resolve('./src/assets/videos/'),
