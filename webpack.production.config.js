@@ -85,6 +85,7 @@ module.exports = {
       test: /\.(eot|ttf|woff2?)$/i,
       include: [
         path.resolve('./node_modules'),
+        path.resolve('./src/assets/fonts/'),
       ],
       type: 'asset/inline',
     }, {
