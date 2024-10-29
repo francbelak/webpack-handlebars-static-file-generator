@@ -30,11 +30,6 @@ Set default language in webpack.settings.js to define which language should be u
 |--|--|
 |`npm start`| starts webpack dev server |
 |`npm run build`| generates the production build for deployment |
-|`npm run deploy`| deploys the project |
-
-## Deploy
-
-Duplicate **deploy.settings.sample.js** and name it **deploy.settings.js**. See https://github.com/simonh1000/ftp-deploy for more information.
 
 ## Questions
 

@@ -117,11 +117,6 @@ module.exports = {
             interlaced: true,
           },
         },
-      }, {
-        loader: 'cleanup-loader',
-        options: {
-          test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i,
-        },
       }],
     }, {
       test: /\.handlebars$/,
