@@ -7,5 +7,8 @@
     "extends": "airbnb-base",
     "rules": {
         "no-new": "off"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020
     }
 }
