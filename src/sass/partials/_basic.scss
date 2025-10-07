@@ -1,3 +1,5 @@
+@use './vars' as vars;
+
 html, body {
   margin: 0;
   padding: 0;
@@ -9,7 +11,7 @@ html, body {
 }
 
 h1, h2, h3, h4 {
-  margin: $gutter 0;
+  margin: vars.$gutter 0;
   font-family: 'Arial', sans-serif;
   font-weight: inherit;
   line-height: 1.2;

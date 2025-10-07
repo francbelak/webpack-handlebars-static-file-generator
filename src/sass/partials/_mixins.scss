@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @mixin hover-state {
   &:hover,
   &:focus {
@@ -12,7 +14,8 @@
   a#{$modifier},
   button#{$modifier} {
     @include hover-state {
-      background-color: darken($color, 20%);
+      background-color: color.adjust($color, $lightness: -20%)
+
     }
   }
 }
@@ -23,7 +26,8 @@
   }
   a#{$modifier} {
     @include hover-state {
-      color: darken($color, 20%);
+      color: color.adjust($color, $lightness: -20%)
+
     }
   }
 }

@@ -1,13 +1,15 @@
+@use './vars' as vars;
+
 .textpic {
-  margin: 0 $gutter;
+  margin: 0 vars.$gutter;
 }
 
 .textpic__content {
   display: flex;
   background: white;
-  padding: $gutter $gutter;
+  padding: vars.$gutter vars.$gutter;
 }
 
 .content__image {
-  margin-right: $gutter;
+  margin-right: vars.$gutter;
 }

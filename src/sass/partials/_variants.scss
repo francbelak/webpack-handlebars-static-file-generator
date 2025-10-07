@@ -1,19 +1,22 @@
-@each $color, $value in $colors {
-  @include bg-mode(".bg-#{$color}", $value);
+@use './mixins' as mixins;
+@use './vars' as vars;
+
+@each $color, $value in vars.$colors {
+  @include mixins.bg-mode(".bg-#{$color}", $value);
 }
 
-@each $color, $value in $colors {
+@each $color, $value in vars.$colors {
   .border-#{$color} {
     border: 1px solid $value;
   }
 }
 
-@each $color, $value in $colors {
+@each $color, $value in vars.$colors {
   .border-bottom-#{$color} {
     border-bottom: 1px solid $value;
   }
 }
 
-@each $color, $value in $colors {
-  @include text-color-mode(".text-#{$color}", $value);
+@each $color, $value in vars.$colors {
+  @include mixins.text-color-mode(".text-#{$color}", $value);
 }
